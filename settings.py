@@ -20,8 +20,8 @@ LOCATIONS = {
         'path': 'C:/Users/Администратор/PycharmProjects',
     },
     'github': {
-        'user': 'asg2016',
-        'password': 'uR7ExM51',
+        'user': '',
+        'password': '',
         # 'key': 'asasdferdrfrefesd345323423523fgdfgg4ert34',
         'temp_dir': 'd:/temp',
         'clear_temp': True,
