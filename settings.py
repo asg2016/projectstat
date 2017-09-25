@@ -3,12 +3,16 @@
 """
 
 PROJECTS_SETTINGS = {
+    # 'python_projects': {
+    #     'location': 'local',
+    #     'max_files_processing': 10,
+    #     'file_patterns': ('*.py',),
+    # },
     'python_projects': {
-        'location': 'local',
+        'location': 'github',
+        'max_files_processing': 10,
         'file_patterns': ('*.py',),
     },
-    'js_projects': {},
-    'project_names': ('home_work', 'home_work1', 'projectstat'),
 }
 
 LOCATIONS = {
@@ -18,7 +22,10 @@ LOCATIONS = {
     'github': {
         'user': 'asg2016',
         'password': 'uR7ExM51',
+        # 'key': 'asasdferdrfrefesd345323423523fgdfgg4ert34',
         'temp_dir': 'd:/temp',
-        'del_after': True,
+        'clear_temp': True,
     }
 }
+
+
