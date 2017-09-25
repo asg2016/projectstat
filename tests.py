@@ -1,4 +1,4 @@
-from verbstat import *
+from projectstat import *
 
 
 python = ProjectPythonModule('c:/python36/lib','ast.py')

@@ -20,23 +20,10 @@ class ProjectModule:
             self.module_content = None
             raise
 
-    def __build_stat__(self):
-        pass
-
 
 class ProjectPythonModule(ProjectModule):
     def __load_module__(self, module_path):
         super().__load_module__(module_path)
         if self.module_content is not None:
             self.tree = python_module_parse(self.module_content)
-
-    def __build_stat__(self):
-        pass
-
-
-
-
-class ProjectJSModule(ProjectModule):
-    def __init__(self, module_path, module_file):
-        super().__init__(module_path, module_file)
 
