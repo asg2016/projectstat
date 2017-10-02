@@ -1,8 +1,8 @@
 from projectstat import *
-import ast
 
-#project = PythonProject('D:/PyCharmProjects/home_work1/verbstat', 'verbstat')
-project = PythonProject('C:/Users/Администратор/PycharmProjects/projectstat', 'projectstat')
+project = PythonProject('',
+                        'https://github.com/gitpython-developers/GitPython.git',
+                        'GitPython')
 
 print(project.project_name)
 print('=================================================')
