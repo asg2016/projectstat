@@ -38,8 +38,10 @@ class Project:
             return
 
     def __load_modules__(self, project_path):
+        print('start loading modules...')
         if project_path is not None and os.path.exists(project_path):
             for dirname, dirs, files in os.walk(project_path, topdown=True):
+                print(files)
                 for file in files:
                     full_path = os.path.join(dirname, file)
                     if self.is_my_module(full_path) and \

@@ -5,6 +5,7 @@ project = PythonProject('',
                         'GitPython')
 
 print(project.project_name)
+print(project.project_path)
 print('=================================================')
 for path in project.modules.keys():
     if project.modules[path] is not None:

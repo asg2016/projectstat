@@ -2,10 +2,6 @@ import ast
 from .parsers import *
 
 
-def list_sum(list, list_to_sum):
-    return list.extend(list_to_sum)
-
-
 class ProjectModule:
     def __init__(self, module_full_path):
         self.module_path = module_full_path
