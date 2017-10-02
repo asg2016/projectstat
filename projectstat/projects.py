@@ -27,9 +27,10 @@ class Project:
         if project_path is not None and os.path.exists(project_path):
             for dirname, dirs, files in os.walk(project_path, topdown=True):
                 for file in files:
-                    if self.is_my_module(file) and \
-                            not self.is_last_module_for_processing():
-                        self.modules[os.path.join(dirname, file)] = None
+                    full_path = os.path.join(dirname, file)
+                    if self.is_my_module(full_path) and \
+                        not self.is_last_module_for_processing():
+                        self.modules[full_path] = None
 
 
 class PythonProject(Project):
@@ -41,6 +42,5 @@ class PythonProject(Project):
     def __load_modules__(self, project_path):
         super().__load_modules__(project_path)
         for python_module_filename in self.modules.keys():
-            self.modules[python_module_filename] = ProjectPythonModule(python_module_filename)
-
-
+            self.modules[python_module_filename] = \
+                ProjectPythonModule(python_module_filename)
