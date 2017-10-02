@@ -1,6 +1,6 @@
 from projectstat import *
 
 
-python = ProjectPythonModule('c:/python36/lib','ast.py')
-print(python.module_content)
-print(python.tree)
+project = PythonProject('D:/PyCharmProjects/home_work1/verbstat', 'verbstat')
+for path in project.modules.keys():
+    print(path)
