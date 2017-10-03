@@ -39,8 +39,11 @@ class Project:
 
     def __load_modules__(self, project_path):
         print('start loading modules...')
+        print(project_path)
         if project_path is not None and os.path.exists(project_path):
+            print('start for')
             for dirname, dirs, files in os.walk(project_path, topdown=True):
+                print(dirs)
                 print(files)
                 for file in files:
                     full_path = os.path.join(dirname, file)

@@ -1,11 +1,9 @@
 from projectstat import *
 
-project = PythonProject('',
-                        'https://github.com/gitpython-developers/GitPython.git',
+project = PythonProject('D:\\PyCharmProjects\\projectstat\\GitPython',
+                        None, #https://github.com/gitpython-developers/GitPython.git
                         'GitPython')
 
-print(project.project_name)
-print(project.project_path)
 print('=================================================')
 for path in project.modules.keys():
     if project.modules[path] is not None:

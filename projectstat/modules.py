@@ -22,14 +22,18 @@ class ProjectModule:
         self.names['def_names'] = []
         self.names['var_names'] = []
         self.names['class_names'] = []
-        for node in ast.walk(self.tree):
-            if isinstance(node, ast.FunctionDef) and self.is_valid_def_name(node.name):
-                self.names['def_names'].append(node.name)
-            elif isinstance(node, ast.ClassDef) and self.is_valid_class_name(node.name):
-                self.names['class_names'].append(node.name)
-            elif isinstance(node, ast.Name) and not isinstance(node.ctx, ast.Load) and \
-                    self.is_valid_var_name(node.id):
-                self.names['var_names'].append(node.id)
+        try:
+            for node in ast.walk(self.tree):
+                if isinstance(node, ast.FunctionDef) and self.is_valid_def_name(node.name):
+                    self.names['def_names'].append(node.name)
+                elif isinstance(node, ast.ClassDef) and self.is_valid_class_name(node.name):
+                    self.names['class_names'].append(node.name)
+                elif isinstance(node, ast.Name) and not isinstance(node.ctx, ast.Load) and \
+                                self.is_valid_var_name(node.id):
+                    self.names['var_names'].append(node.id)
+        except AttributeError as err:
+            print(self.module_path, ' ', err)
+
 
     def is_valid_def_name(self, def_name):
         return True
@@ -49,6 +53,9 @@ class ProjectPythonModule(ProjectModule):
 
     def is_valid_def_name(self, def_name):
         return not (def_name.startswith('__') and def_name.endswith('__'))
+
+    def is_valid_var_name(self, var_name):
+        return not (var_name.startswith('__') and var_name.endswith('__'))
 
     def __load_module__(self, module_full_path):
         super().__load_module__(module_full_path)
