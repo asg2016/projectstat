@@ -8,10 +8,8 @@ class ProjectModule:
         self.names = {'def': [], 'var': [], 'class':[]}
         self.tree = None
         self.module_content = None
-        self.module_stat = {'def': {}, 'var': {}, 'class': {}}
         self.__load_module__(module_full_path)
         self.__categorize_nodes__()
-        self.__build_stat__(top_size)
 
     def __load_module__(self, module_full_path):
         try:
@@ -46,10 +44,6 @@ class ProjectModule:
     def is_not_empty(self):
         return self.module_content is not None and \
                self.module_content != ''
-
-    def __build_stat__(self, top_size):
-        for items_key, items_val in self.names.items():
-            self.module_stat[items_key] = get_frequency_word_stat(items_val, top_size)
 
 
 class ProjectPythonModule(ProjectModule):
