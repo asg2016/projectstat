@@ -1,4 +1,5 @@
 import os
+from collections import Counter
 from git import Git, GitCommandError
 from .modules import *
 
@@ -11,7 +12,7 @@ class Project:
     def __init__(self, project_path = None,
                  project_clone_url = None,
                  project_name = None,
-                 max_modules_processing=0, top_size=100):
+                 max_modules_processing=0, top_size=10):
         self.modules = {}
         self.modules_ext = ''
         if project_clone_url is not None:
@@ -48,6 +49,18 @@ class Project:
                         not self.is_last_module_for_processing():
                         self.modules[full_path] = None
 
+    def get_project_stat(self):
+        verbs = Counter()
+        nouns = Counter()
+        for module_key, cur_module in self.modules.items():
+            verbs += Counter(cur_module.module_stat['def']['verbs']) + \
+                     Counter(cur_module.module_stat['var']['verbs']) + \
+                     Counter(cur_module.module_stat['class']['verbs'])
+            nouns += Counter(cur_module.module_stat['def']['nouns']) + \
+                     Counter(cur_module.module_stat['var']['nouns']) + \
+                     Counter(cur_module.module_stat['class']['nouns'])
+        return {'verbs': dict(verbs), 'nouns': dict(nouns)}
+
 
 class PythonProject(Project):
     def __init__(self, project_path=None,
@@ -66,4 +79,4 @@ class PythonProject(Project):
         super().__load_modules__()
         for python_module_filename in self.modules.keys():
             self.modules[python_module_filename] = \
-                ProjectPythonModule(python_module_filename)
+                ProjectPythonModule(python_module_filename, self.top_size)

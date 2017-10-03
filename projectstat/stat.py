@@ -1,14 +1,14 @@
-import collections
+from collections import Counter
 from nltk import pos_tag
 
 
 def get_stat(list_of_names, top_size):
     words_by_categories = names_to_words_by_categories(list_of_names)
     stat = {}
-    for category, word_list in words_by_categories:
+    for category, word_list in words_by_categories.items():
         category_dict = {}
         for word, value in \
-                collections.Counter(word_list).most_common(top_size):
+                Counter(word_list).most_common(top_size):
             category_dict[word] = value
         stat[category] = category_dict
     return stat

@@ -1,14 +1,17 @@
 from .parsers import *
+from .stat import get_stat
 
 
 class ProjectModule:
-    def __init__(self, module_full_path):
+    def __init__(self, module_full_path, top_size):
         self.module_path = module_full_path
-        self.names = {}
+        self.names = {'def': [], 'var': [], 'class':[]}
         self.tree = None
         self.module_content = None
+        self.module_stat = {'def': {}, 'var': {}, 'class': {}}
         self.__load_module__(module_full_path)
         self.__categorize_nodes__()
+        self.__build_stat__(top_size)
 
     def __load_module__(self, module_full_path):
         try:
@@ -19,18 +22,15 @@ class ProjectModule:
             print(err)
 
     def __categorize_nodes__(self):
-        self.names['def_names'] = []
-        self.names['var_names'] = []
-        self.names['class_names'] = []
         try:
             for node in ast.walk(self.tree):
                 if isinstance(node, ast.FunctionDef) and self.is_valid_def_name(node.name):
-                    self.names['def_names'].append(node.name)
+                    self.names['def'].append(node.name)
                 elif isinstance(node, ast.ClassDef) and self.is_valid_class_name(node.name):
-                    self.names['class_names'].append(node.name)
+                    self.names['class'].append(node.name)
                 elif isinstance(node, ast.Name) and not isinstance(node.ctx, ast.Load) and \
                         self.is_valid_var_name(node.id):
-                    self.names['var_names'].append(node.id)
+                    self.names['var'].append(node.id)
         except AttributeError as err:
             print(self.module_path, ' ', err)
 
@@ -47,8 +47,10 @@ class ProjectModule:
         return self.module_content is not None and \
                self.module_content != ''
 
-    def get_module_stat(self, category_name):
-        pass
+    def __build_stat__(self, top_size):
+        for items_key, items_val in self.names.items():
+            self.module_stat[items_key] = get_stat(items_val, top_size)
+
 
 class ProjectPythonModule(ProjectModule):
     def is_valid_def_name(self, def_name):
