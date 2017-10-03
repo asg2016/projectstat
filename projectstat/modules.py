@@ -1,5 +1,5 @@
 from .parsers import *
-from .stat import get_stat
+from .stat import get_frequency_word_stat
 
 
 class ProjectModule:
@@ -49,7 +49,7 @@ class ProjectModule:
 
     def __build_stat__(self, top_size):
         for items_key, items_val in self.names.items():
-            self.module_stat[items_key] = get_stat(items_val, top_size)
+            self.module_stat[items_key] = get_frequency_word_stat(items_val, top_size)
 
 
 class ProjectPythonModule(ProjectModule):

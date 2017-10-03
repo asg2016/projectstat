@@ -4,6 +4,7 @@ import argparse
 def create_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('path', nargs='p')
+    parser.add_argument('path', nargs='p')
     return parser
 
 

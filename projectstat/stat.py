@@ -2,7 +2,7 @@ from collections import Counter
 from nltk import pos_tag
 
 
-def get_stat(list_of_names, top_size):
+def get_frequency_word_stat(list_of_names, top_size):
     words_by_categories = names_to_words_by_categories(list_of_names)
     stat = {}
     for category, word_list in words_by_categories.items():
