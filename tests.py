@@ -1,7 +1,6 @@
 from projectstat import *
 
-project = PythonProject('D:\\PyCharmProjects\\projectstat\\GitPython',
-                        None, #https://github.com/gitpython-developers/GitPython.git
+project = PythonProject('', 'https://github.com/gitpython-developers/GitPython.git',
                         'GitPython')
 
 print('=================================================')

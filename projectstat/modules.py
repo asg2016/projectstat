@@ -1,4 +1,3 @@
-import ast
 from .parsers import *
 
 
@@ -13,10 +12,11 @@ class ProjectModule:
 
     def __load_module__(self, module_full_path):
         try:
-            with open(module_full_path, 'r', encoding='utf-8') as module_handler:
+            with open(module_full_path, 'r',
+                      encoding='utf-8') as module_handler:
                 self.module_content = module_handler.read()
-        except FileNotFoundError:
-            raise
+        except FileNotFoundError as err:
+            print(err)
 
     def __categorize_nodes__(self):
         self.names['def_names'] = []
@@ -29,11 +29,10 @@ class ProjectModule:
                 elif isinstance(node, ast.ClassDef) and self.is_valid_class_name(node.name):
                     self.names['class_names'].append(node.name)
                 elif isinstance(node, ast.Name) and not isinstance(node.ctx, ast.Load) and \
-                                self.is_valid_var_name(node.id):
+                        self.is_valid_var_name(node.id):
                     self.names['var_names'].append(node.id)
         except AttributeError as err:
             print(self.module_path, ' ', err)
-
 
     def is_valid_def_name(self, def_name):
         return True
@@ -48,9 +47,10 @@ class ProjectModule:
         return self.module_content is not None and \
                self.module_content != ''
 
+    def get_module_stat(self, category_name):
+        pass
 
 class ProjectPythonModule(ProjectModule):
-
     def is_valid_def_name(self, def_name):
         return not (def_name.startswith('__') and def_name.endswith('__'))
 
