@@ -1,10 +1,8 @@
 from projectstat import *
 
 project = PythonProject('',
-                        'https://github.com/gitpython-developers/GitPython.git',
-                        'GitPython',
-                        0,
-                        10)
+                        'https://github.com/geekcomputers/Python.git',
+                        'Python', 0, 10)
 
 print('==================PROJECT NAME===================')
 print('===============', project.project_name, '===============')
