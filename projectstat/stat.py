@@ -18,10 +18,11 @@ def names_to_words_by_categories(list_of_names):
     words = get_words_from_split_names(list_of_names)
     categories = {'verbs': [], 'nouns': []}
     for word in words:
-        if is_verb(word):
-            categories['verbs'].append(word)
-        else:
-            categories['nouns'].append(word)
+        if word and word != '':
+            if is_verb(word):
+                categories['verbs'].append(word)
+            else:
+                categories['nouns'].append(word)
     return categories
 
 
@@ -36,7 +37,5 @@ def get_words_from_split_names(list_of_names):
 
 
 def is_verb(word):
-    if not word:
-        return False
     pos_info = pos_tag([word])
     return pos_info[0][1] == 'VB'

@@ -59,7 +59,10 @@ class Project:
             nouns += Counter(cur_module.module_stat['def']['nouns']) + \
                      Counter(cur_module.module_stat['var']['nouns']) + \
                      Counter(cur_module.module_stat['class']['nouns'])
-        return {'verbs': dict(verbs), 'nouns': dict(nouns)}
+        return {
+                'verbs': dict(verbs.most_common(self.top_size)),
+                'nouns': dict(nouns.most_common(self.top_size))
+                }
 
 
 class PythonProject(Project):
