@@ -6,9 +6,9 @@ from projectstat.reports import ProjectReport, ModuleReport
 
 def create_parser():
     parser = argparse.ArgumentParser(description='Build some stat about your projects.')
-    parser.add_argument('path', action='store', type=str,
+    parser.add_argument('-path', action='store', type=str,
                         help='path to local project')
-    parser.add_argument('git', action='store', type=str,
+    parser.add_argument('-git', action='store', type=str,
                         help='clone url for project.git')
     parser.add_argument('--common', action='store_true',
                         help='common project stat')
@@ -29,6 +29,8 @@ def create_parser():
 
 if __name__ == '__main__':
     parser = create_parser()
+    path = None
+    clone_url = None
     project = None
     report_common = None
     report_module = None
@@ -50,7 +52,7 @@ if __name__ == '__main__':
         project = PythonProject(project_path=path, project_clone_url=None,
                                 project_name=project_name, max_modules_processing=max_files)
 
-    elif namespace.git is not None:
+    elif namespace.git is not None and namespace.git != '':
         clone_url = namespace.git
         project = PythonProject(project_path=None, project_clone_url=clone_url,
                                 project_name=project_name, max_modules_processing=max_files)
@@ -66,12 +68,12 @@ if __name__ == '__main__':
             print(report_common.stat)
             print('==========================================')
             if namespace.json is not None and os.path.exists(namespace.json):
-                report_common.to_json(os.path.join(namespace.json, project_name, '.json'))
+                report_common.to_json(os.path.join(namespace.json, project_name + '.json'))
             if namespace.csv is not None and os.path.exists(namespace.csv):
-                report_common.to_csv(os.path.join(namespace.csv, project_name, '.csv'))
+                report_common.to_csv(os.path.join(namespace.csv, project_name + '.csv'))
         if namespace.detail:
             for module in project.modules:
-                report_module = ModuleReport(module)
+                report_module = ModuleReport(module, top_size)
                 print('-----------------------------------------')
                 print('Details for module ', module.module_path)
                 print('-----------------------------------------')

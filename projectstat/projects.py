@@ -52,8 +52,7 @@ class PythonProject(Project):
     def __init__(self, project_path=None,
                  project_clone_url=None,
                  project_name=None,
-                 max_modules_processing=0,
-                 top_size=100):
+                 max_modules_processing=0):
         super().__init__(project_path, project_clone_url,
                          project_name, max_modules_processing)
         self.modules_ext = '.py'
