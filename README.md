@@ -1,5 +1,5 @@
 # projectstat
-h2 Build statistics about your project and modules
+## Build statistics about your project and modules
 
 Very simple example for git-project:
 ```python
@@ -15,7 +15,7 @@ from projectstat import *
 project = PythonProject('/home/user/project', None, 'Python')
 report = ProjectReport(project, 20)
 ```
-h2 You can use projectstat from cmdline with projectstat.py
+## You can use projectstat from cmdline with projectstat.py
 
 >usage: projectstat.py [-h] [-path PATH] [-git GIT] [--common] [--detail]
 >                      [-name NAME] [-topsize TOPSIZE] [-maxfiles MAXFILES]
