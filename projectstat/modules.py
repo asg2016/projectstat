@@ -1,5 +1,4 @@
 from .parsers import *
-from .stat import get_frequency_word_stat
 
 
 class ProjectModule:

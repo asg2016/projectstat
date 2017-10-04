@@ -84,4 +84,3 @@ if __name__ == '__main__':
                     report_module.to_json(os.path.join(namespace.json, project_name + '_' + file_name + '.json'))
                 if namespace.csv is not None and os.path.exists(namespace.csv):
                     report_module.to_csv(os.path.join(namespace.csv, project_name + '_' + file_name + '.csv'))
-
