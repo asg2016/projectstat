@@ -5,7 +5,7 @@ from .stat import get_frequency_word_stat
 
 
 class BaseReport():
-    def __init__(self):
+    def __init__(self, project, top_size):
         self.stat = {}
 
 
@@ -39,12 +39,12 @@ class ProjectReport(BaseReport):
         verbs = Counter()
         nouns = Counter()
         for module_key, cur_module in project.modules.items():
-            verbs += Counter(cur_module.module_stat['def']['verbs']) + \
-                         Counter(cur_module.module_stat['var']['verbs']) + \
-                         Counter(cur_module.module_stat['class']['verbs'])
-            nouns += Counter(cur_module.module_stat['def']['nouns']) + \
-                         Counter(cur_module.module_stat['var']['nouns']) + \
-                         Counter(cur_module.module_stat['class']['nouns'])
+            verbs += Counter(ModuleReport(cur_module, top_size).stat['def']['verbs']) + \
+                         Counter(ModuleReport(cur_module, top_size).stat['var']['verbs']) + \
+                         Counter(ModuleReport(cur_module, top_size).stat['class']['verbs'])
+            nouns += Counter(ModuleReport(cur_module, top_size).stat['def']['nouns']) + \
+                         Counter(ModuleReport(cur_module, top_size).stat['var']['nouns']) + \
+                         Counter(ModuleReport(cur_module, top_size).stat['class']['nouns'])
         return {
                 'verbs': dict(verbs.most_common(top_size)),
                 'nouns': dict(nouns.most_common(top_size))

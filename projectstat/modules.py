@@ -3,7 +3,7 @@ from .stat import get_frequency_word_stat
 
 
 class ProjectModule:
-    def __init__(self, module_full_path, top_size):
+    def __init__(self, module_full_path):
         self.module_path = module_full_path
         self.names = {'def': [], 'var': [], 'class':[]}
         self.tree = None
