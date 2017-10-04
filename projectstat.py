@@ -72,16 +72,16 @@ if __name__ == '__main__':
             if namespace.csv is not None and os.path.exists(namespace.csv):
                 report_common.to_csv(os.path.join(namespace.csv, project_name + '.csv'))
         if namespace.detail:
-            for module in project.modules:
-                report_module = ModuleReport(module, top_size)
+            for module_path, project_module in project.modules.items():
+                report_module = ModuleReport(project_module, top_size)
                 print('-----------------------------------------')
-                print('Details for module ', module.module_path)
+                print('Details for module ', project_module.module_path)
                 print('-----------------------------------------')
                 print(report_module.stat)
                 print('-----------------------------------------')
-                dir_name, file_name = os.path.split(module.module_path)
+                dir_name, file_name = os.path.split(project_module.module_path)
                 if namespace.json is not None and os.path.exists(namespace.json):
-                    report_module.to_json(os.path.join(namespace.json, project_name, file_name, '.json'))
+                    report_module.to_json(os.path.join(namespace.json, project_name + '_' + file_name + '.json'))
                 if namespace.csv is not None and os.path.exists(namespace.csv):
-                    report_module.to_csv(os.path.join(namespace.csv, project_name, file_name, '.csv'))
+                    report_module.to_csv(os.path.join(namespace.csv, project_name + '_' + file_name + '.csv'))
 
